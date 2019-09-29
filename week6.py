@@ -43,7 +43,7 @@ for lat_lng in lat_lngs:
 # Print the city count to confirm sufficient count
 print(len(cities))
 
-dataframe_ = pd.DataFrame(columns=['City', 'Cloudiness', 'Country', 'Date', 'Humidity', 'Lat', 'Long', 'Max Temp', 'Wind Speed'])
+dataframe_ = pd.DataFrame(columns=['City', 'Country', 'Date', 'Humidity', 'Lat', 'Long', 'Max Temp', 'Wind Speed'])
 
 
 for city in cities:
@@ -55,10 +55,7 @@ for city in cities:
     json_data = json.loads(response.text)
 
     city = city
-
     cloudiness = json_data['clouds']
-    cloudiness = cloudiness['all']
-
     country = json_data['name']
     date = json_data['dt']
     humidity = json_data['main']
@@ -89,27 +86,26 @@ for city in cities:
     }
 
     dataframe_.append(dictionary, ignore_index=True)
-    
 
 print(dataframe_)
 
-dataframe_.to_csv('dataframe_generated.csv')
+dataframe_.to_csv('dfnew.csv')
 
 lattitude = dataframe_['Lat'].tolist()
-
 maxtemperaature = dataframe_['Max Temp'].tolist()
-
 cloudiness = dataframe_['Cloudiness'].tolist()
-
 windspeed = dataframe_['Wind Speed'].tolist()
 
-
-
-
-
-
 plt.scatter(lattitude,maxtemperaature)
+plt.show()
+
 plt.scatter(lattitude,humidity)
+plt.show()
+
 plt.scatter(lattitude,cloudiness)
+plt.show()
+
 plt.scatter(lattitude,windspeed)
+plt.show()
+
 
